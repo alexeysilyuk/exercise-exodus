@@ -78,7 +78,7 @@ async def get_city_weather(location_country: str, collection=Depends(get_collect
 
     except pymongo.errors.PyMongoError as e:
         logger.error(f"Database error: {e}")
-        raise HTTPException(status_code=500, detail=f"Internal Server Error")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 if __name__ == "__main__":
     import uvicorn
