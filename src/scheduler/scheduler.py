@@ -1,4 +1,5 @@
 import os
+import json
 import asyncio
 import aiohttp
 import boto3
@@ -62,9 +63,10 @@ async def process_city_weather(session, city):
     try:
         # Fetch weather data for the city and country
         weather_data = await fetch_weather_data(session, city)      
+        weather_data_json = json.dumps(weather_data)
 
-        # Send the data to SQS
-        await send_to_sqs(city, weather_data)
+        # Send the data to SQS as a JSON string
+        await send_to_sqs(city, weather_data_json)
 
     except Exception as e:
         print(f"Can't get data for {city}: {e}")
