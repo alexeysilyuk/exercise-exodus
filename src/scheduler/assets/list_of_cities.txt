@@ -1,0 +1,103 @@
+Tokyo, Japan  
+Delhi, India  
+Shanghai, China  
+São Paulo, Brazil  
+Mexico City, Mexico  
+Cairo, Egypt  
+Mumbai, India  
+Beijing, China  
+Dhaka, Bangladesh  
+Osaka, Japan  
+New York City, USA  
+Karachi, Pakistan  
+Chongqing, China  
+Istanbul, Turkey  
+Buenos Aires, Argentina  
+Kolkata, India  
+Lagos, Nigeria  
+Kinshasa, Democratic Republic of the Congo  
+Manila, Philippines  
+Tianjin, China  
+Guangzhou, China  
+Rio de Janeiro, Brazil  
+Lahore, Pakistan  
+Shenzhen, China  
+Bangalore, India  
+Moscow, Russia  
+Chennai, India  
+Bogotá, Colombia  
+Paris, France  
+Jakarta, Indonesia  
+Lima, Peru  
+Bangkok, Thailand  
+Hyderabad, India  
+Seoul, South Korea  
+Nagoya, Japan  
+London, United Kingdom  
+Chengdu, China  
+Nanjing, China  
+Tehran, Iran  
+Ho Chi Minh City, Vietnam  
+Luanda, Angola  
+Wuhan, China  
+Xi’an, China  
+Hong Kong, China  
+Ahmedabad, India  
+Kuala Lumpur, Malaysia  
+Hangzhou, China  
+Surat, India  
+Suzhou, China  
+New Taipei City, Taiwan  
+Riyadh, Saudi Arabia  
+Shijiazhuang, China  
+Harbin, China  
+Cape Town, South Africa  
+Zhengzhou, China  
+Shenyang, China  
+Qingdao, China  
+Dalian, China  
+Singapore, Singapore  
+Jinan, China  
+Fukuoka, Japan  
+Zhongshan, China  
+Yangon, Myanmar  
+Foshan, China  
+Busan, South Korea  
+Izmir, Turkey  
+Xiamen, China  
+Guayaquil, Ecuador  
+Chittagong, Bangladesh  
+Addis Ababa, Ethiopia  
+Melbourne, Australia  
+Nairobi, Kenya  
+Changsha, China  
+Hefei, China  
+Urumqi, China  
+Changchun, China  
+Kunming, China  
+Belo Horizonte, Brazil  
+Brasília, Brazil  
+Accra, Ghana  
+Dubai, United Arab Emirates  
+Durban, South Africa  
+Casablanca, Morocco  
+Medellín, Colombia  
+Yaoundé, Cameroon  
+Havana, Cuba  
+Kano, Nigeria  
+Caracas, Venezuela  
+Baku, Azerbaijan  
+Luoyang, China  
+Taiyuan, China  
+Shenzhen, China  
+Douala, Cameroon  
+Tangshan, China  
+Baghdad, Iraq  
+Kuwait City, Kuwait  
+Nanchang, China  
+Conakry, Guinea  
+Khartoum, Sudan  
+Fuzhou, China  
+Ibadan, Nigeria  
+Johannesburg, South Africa  
+Giza, Egypt
