@@ -4,3 +4,5 @@ python-dotenv==0.19.2
 asyncio==3.4.3
 aiohttp==3.10.5
 pymongo==4.8.0
+fastapi==0.112.1
+uvicorn==0.30.6
