@@ -50,7 +50,6 @@ class Processor:
                 return collection
             except (ConnectionFailure, OperationFailure) as e:
                 print(f"MongoDB connection failed. Retrying ... (Attempt {attempt + 1}/{retries})")
-                time.sleep(5)
             except Exception as e:
                 print(f"Unexpected error: {e}")
                 raise
@@ -60,7 +59,7 @@ class Processor:
         # Insert data into MongoDB
         self.collection.insert_one({
             'localtime': localtime,
-            'name': name,
+            'city': name,
             'country': country,
             'temp_c': temp_c,
             'condition': condition
