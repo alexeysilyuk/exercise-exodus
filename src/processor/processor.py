@@ -32,12 +32,16 @@ class Processor:
         # Connect to MongoDB
         self.collection = self.connect_to_mongo()
 
+    def get_mongo_client(self):
+        # Create a MongoClient instance with a connection timeout of 5 seconds
+        return pymongo.MongoClient(self.database_url, serverSelectionTimeoutMS=5000)
+        
     def connect_to_mongo(self):
         retries = 5
         for attempt in range(retries):
             try:
                 # Create a MongoClient instance with a connection timeout of 5 seconds
-                mongo_client = pymongo.MongoClient(self.database_url, serverSelectionTimeoutMS=5000)
+                mongo_client = self.get_mongo_client()
                 # Attempt to access the server
                 mongo_client.server_info()  # Triggers a server selection to ensure the connection is valid
                 mongo_db = mongo_client.get_database()  # Use the default database from connewction URL
