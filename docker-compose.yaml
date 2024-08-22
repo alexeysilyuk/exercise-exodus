@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./src/api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+
+  processor:
+    build:
+      context: ./src/processor
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+
+  scheduler:
+    build:
+      context: ./src/scheduler
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=exodus_exercise
