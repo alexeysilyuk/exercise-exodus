@@ -34,14 +34,20 @@ class Scheduler:
 
         # Path to the text file containing the list of cities
         self.list_of_cities_file_path = os.path.join(self.current_file_path, 'assets/list_of_cities.txt')
-
-        # Load cities list from file
-        with open(self.list_of_cities_file_path, 'r') as file:
-            self.list_of_cities_country = [line.strip() for line in file.readlines()]
+        
+        # Check if the file exists and load cities list from file or initialize with an empty array
+        if os.path.exists(self.list_of_cities_file_path):
+            with open(self.list_of_cities_file_path, 'r') as file:
+                self.list_of_cities_country = [line.strip() for line in file.readlines()]
+        else:
+            print(f"File '{self.list_of_cities_file_path}' not found. Creating an empty list.")
+            self.list_of_cities_country = []
 
     async def fetch_weather_data(self, session, city):
         api_url = f'http://api.weatherapi.com/v1/current.json?key={self.weather_api_key}&q={city}'
         async with session.get(api_url) as response:
+            if response.status!= 200:
+                raise Exception(f"API request failed with status code {response.status}")
             return await response.json()
 
     async def send_to_sqs(self, city, weather_data_json):
