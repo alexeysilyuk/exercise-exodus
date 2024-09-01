@@ -94,8 +94,8 @@ class Processor:
             response = self.sqs.receive_message(
                 QueueUrl=self.queue_url,
                 AttributeNames=['All'],
-                MaxNumberOfMessages=1,
-                VisibilityTimeout=0,
+                MaxNumberOfMessages=10,
+                VisibilityTimeout=60,
                 WaitTimeSeconds=0
             )
 
