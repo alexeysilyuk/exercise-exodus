@@ -78,8 +78,8 @@ async def test_get_city_weather_db_error(override_get_collection_with_error):
     assert response.json() == {"detail": "Internal Server Error"}
     
     
-@patch('src.api.api.get_mongo_client', side_effect=pymongo.errors.ConnectionFailure("Connection failed"))  # Patch the correct path
+@patch('src.db.db.MongoDB.get_mongo_client', side_effect=pymongo.errors.ConnectionFailure("Connection failed"))  # Patch the correct path
 def test_get_city_weather_retry_logic(mock_get_client):
     with pytest.raises(Exception, match="Failed to connect to MongoDB."):
-        from src.api.api import get_collection  # Import inside the test to ensure it's patched
-        get_collection()
+        from src.db.db import MongoDB  # Import inside the test to ensure it's patched
+        MongoDB().get_collection()
