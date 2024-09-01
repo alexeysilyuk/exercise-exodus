@@ -1,49 +1,23 @@
-import os
 import logging
 from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 import pymongo
-from pymongo.errors import ConnectionFailure, OperationFailure
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
-
-# Get environment variables
-database_url = os.getenv('MONGO_DATABASE_URL')
+from  db.db import MongoDB
+from pymongo.collection import Collection
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("App")
-
+logger = logging.getLogger("API")
 app = FastAPI()
-
-def get_mongo_client():
-    # Create a MongoClient instance with a connection timeout of 5 seconds
-    return pymongo.MongoClient(database_url, serverSelectionTimeoutMS=5000)
-
-def get_collection():
-    retries = 5
-    for attempt in range(retries):
-        try:
-            mongo_client = get_mongo_client()
-            mongo_client.server_info()  # Triggers a server selection to ensure the connection is valid
-            mongo_db = mongo_client.get_database()  # Use the default database from connection URL
-            collection = mongo_db.weather_data
-            
-            logger.info("Connected to MongoDB.")
-            return collection
-        except (ConnectionFailure, OperationFailure) as e:
-            logger.warning(f"MongoDB connection failed. Retrying ... (Attempt {attempt + 1}/{retries})")
-        except Exception as e:
-            logger.error(f"Unexpected error: {e}")
-            raise
-    raise Exception("Failed to connect to MongoDB after several retries.")
 
 class CityWeather(BaseModel):
     city: str
     average_temp_c: float
     lastest_condition_text: str
+
+def get_collection() -> Collection:
+    mongo_db_instance = MongoDB()  # Initialize MongoDB instance
+    return mongo_db_instance.get_collection()
 
 @app.get("/exercise/{location_country}", response_model=list[CityWeather])
 async def get_city_weather(location_country: str, collection=Depends(get_collection)):
