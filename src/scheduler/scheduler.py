@@ -5,11 +5,11 @@ import aiohttp
 import boto3
 from dotenv import load_dotenv
 
+# Load environment variables from .env
+load_dotenv()
+
 class Scheduler:
     def __init__(self):
-        # Load environment variables from .env
-        load_dotenv()
-
         # Get environment variables
         self.aws_access_key_id = os.getenv('AWS_ACCESS_KEY_ID')
         self.aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
@@ -43,14 +43,14 @@ class Scheduler:
             print(f"File '{self.list_of_cities_file_path}' not found. Creating an empty list.")
             self.list_of_cities_country = []
 
-    async def fetch_weather_data(self, session, city):
+    async def __fetch_weather_data(self, session, city):
         api_url = f'http://api.weatherapi.com/v1/current.json?key={self.weather_api_key}&q={city}'
         async with session.get(api_url) as response:
             if response.status!= 200:
                 raise Exception(f"API request failed with status code {response.status}")
             return await response.json()
 
-    async def send_to_sqs(self, city, weather_data_json):
+    async def __send_to_sqs(self, city, weather_data_json):
         response = self.sqs.send_message(
             QueueUrl=self.queue_url,
             MessageAttributes={
@@ -63,14 +63,14 @@ class Scheduler:
         )
         print(f"Sent weather data for {city} to SQS. Message ID: {response['MessageId']}")
 
-    async def process_city_weather(self, session, city):
+    async def __process_city_weather(self, session, city):
         try:
             # Fetch weather data for the city
-            weather_data = await self.fetch_weather_data(session, city)
+            weather_data = await self.__fetch_weather_data(session, city)
             weather_data_json = json.dumps(weather_data)
 
             # Send the data to SQS as a JSON string
-            await self.send_to_sqs(city, weather_data_json)
+            await self.__send_to_sqs(city, weather_data_json)
 
         except Exception as e:
             print(f"Can't get data for {city}: {e}")
@@ -79,7 +79,7 @@ class Scheduler:
         async with aiohttp.ClientSession() as session:
             while True:
                 # Create coroutines to run tasks concurrently
-                tasks = [self.process_city_weather(session, line) for line in self.list_of_cities_country]
+                tasks = [self.__process_city_weather(session, line) for line in self.list_of_cities_country]
                 await asyncio.gather(*tasks)
                 
                 # Sleep for 1 minute between probes
